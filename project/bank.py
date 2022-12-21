@@ -414,11 +414,13 @@ def transfer_post(id):
 
     if amount <= account.account_balance:
         print("amount", amount, "account_balance:", account.account_balance)
-    elif amount < 1:
-        flash(f"cannot transfer a negative number") 
-        return  redirect(url_for('bank.transfer', id=id))
+    
     else:
         flash(f"not enough amount in your account to transfer {amount}") 
+        return  redirect(url_for('bank.transfer', id=id))
+
+    if amount < 1:
+        flash(f"cannot transfer a negative number") 
         return  redirect(url_for('bank.transfer', id=id))
 
     # create transaction to withdraw from my account
