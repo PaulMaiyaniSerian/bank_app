@@ -220,11 +220,12 @@ def withdraw_post(id):
 
     if amount <= account.account_balance:
         print("amount", amount, "account_balance:", account.account_balance)
-    elif amount < 1:
-        flash(f"error cannot withdraw a negative number") 
-        return  redirect(url_for('bank.withdraw', id=id))
     else:
         flash(f"not enough amount in your account to withdraw {amount}") 
+        return  redirect(url_for('bank.withdraw', id=id))
+
+    if amount < 1:
+        flash(f"error cannot withdraw a negative number") 
         return  redirect(url_for('bank.withdraw', id=id))
 
 
