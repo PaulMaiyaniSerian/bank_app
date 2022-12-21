@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center align-content-center flex-wrap">
+ 
+    <div class="card mx-1 my-1 text-center" style="width: 80%; background-color: azure;">
+      <div class="card-body">
+        <h5 class="card-title">Account: {{account.account_number}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Balance: {{account.account_balance}}</h6>
+        <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+        <!-- <a href="{{ url_for('bank.account_details' , id=account.id) }}" class="card-link btn btn-warning">Deposit</a> -->
+        <!-- <a href="{{url_for('bank.deposit', id=account.id)}}" class="card-link btn btn-success btn-sm">Deposit</a>
+        <a href="{{url_for('bank.withdraw', id=account.id)}}" class="card-link btn btn-danger btn-sm">Withdraw</a>
+        <a href="{{url_for('bank.transfer', id=account.id)}}" class="card-link btn btn-warning btn-sm">Transfer</a>
+  
+        <a href="{{url_for('bank.transactions', id=account.id)}}" class="card-link btn btn-warning btn-sm">Transaction History</a> -->
+  
+  
+      </div>
+    </div>
+  
+  </div>
+
+
+<table class="table table-striped-columns">
+<thead>
+    <tr>
+    <th scope="col">id</th>
+    <th scope="col">date</th>
+    <th scope="col">description</th>
+    <th scope="col">status</th>
+    <th scope="col">trans_type</th>
+    <th scope="col">amount</th>
+    <th scope="col">balance</th>
+
+
+    <!-- <th scope="col">From</th>
+    <th scope="col">to</th> -->
+
+
+    </tr>
+</thead>
+<tbody>
+    {% for transaction in transactions %}
+    <tr>
+        <th scope="row">{{transaction.id}}</th>
+        <td>{{transaction.date}}</td>
+        <td>{{transaction.description}}</td>
+        <td>{{transaction.status}}</td>
+        <td>{{transaction.trans_type}}</td>
+        <td>{{transaction.amount}}</td>
+        <td>{{transaction.balance}}</td>
+        <!-- <td>{{transaction.account.account_number}}</td>
+        <td>{{transaction.to_account.account_number}}</td> -->
+
+    </tr>
+    {% endfor %}
+    
+</tbody>
+</table>
+{% endblock %}

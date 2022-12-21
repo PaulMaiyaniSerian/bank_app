@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flask Auth Example</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" /> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='cover.css') }}" />
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section class="hero is-primary is-fullheight">
+
+        <!-- <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+                        <div class="navbar-end">
+                            <a href="{{ url_for('main.index') }}" class="navbar-item">
+                                Home
+                            </a>
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                                Profile
+                            </a>
+                            {% endif %}
+                            {% if not current_user.is_authenticated %}
+                            <a href="{{ url_for('auth.login') }}" class="navbar-item">
+                                Login
+                            </a>
+                            <a href="{{ url_for('auth.signup') }}" class="navbar-item">
+                                Sign Up
+                            </a>
+                            {% endif %}
+
+
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('bank.bank_create_post') }}" class="navbar-item">
+                                Create Account
+                            </a>
+                            {% endif %}
+
+
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('bank.my_accounts') }}" class="navbar-item">
+                                My  Accounts
+                            </a>
+                            {% endif %}
+
+
+
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                                ({{current_user.email}})  Logout
+                            </a>
+                            {% endif %}
+
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div> -->
+
+        <nav class="navbar navbar-expand-lg text-light mx-auto my-auto container navbar-dark text-center" style="background: #3786bd;">
+            <div class="container-fluid ">
+              <a class="navbar-brand" href="#">BankApp</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav mx-auto">
+
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('main.index') }}">Home</a>
+                  </li>
+
+
+                  {% if current_user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.profile') }}">Profile</a>
+                  </li>
+                  {% endif %}
+
+
+                  {% if not current_user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                  </li>
+                  {% endif %}
+
+                  {% if  current_user.is_authenticated and current_user.is_system_user %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.signup') }}">Create User</a>
+                  </li>
+                  {% endif %}
+
+                  {% if  current_user.is_authenticated and current_user.is_system_user %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('bank.bank_create_post') }}">Create Account</a>
+                  </li>
+                  {% endif %}
+
+                  {% if not current_user.is_system_user and current_user.is_authenticated  %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('bank.my_accounts') }}"> My Accounts</a>
+                  </li>
+                  {% endif %}
+                  
+
+
+
+
+                  <li class="nav-item dropdown">
+                    {% if current_user.is_authenticated %}
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            ({{current_user.email}}) Logged In
+                    </a>
+                    {% endif %}
+
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a></li>
+                      
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+
+       
+               <!-- {% with messages = get_flashed_messages() %}
+               {% if messages %}
+                   <div class="notification is-danger">
+                       {{ messages[0] }}
+                   </div>
+               {% endif %}
+               {% endwith %} -->
+
+              
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <div class="container d-flex justify-content-center align-items-center">
+                        <div class="alert alert-secondary" role="alert">
+                            {{ messages[0] }}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+                 
+               {% block content %}
+                
+               
+
+               {% endblock %}
+          
+
+
+        
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"> </script>
+</body>
+
+</html>

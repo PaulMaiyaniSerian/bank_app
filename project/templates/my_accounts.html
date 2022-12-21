@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="subtitle text-center">
+  My Accounts list
+</h2>
+
+
+
+<div class="container d-flex justify-content-center align-items-center align-content-center flex-wrap">
+  {% for account in accounts %}
+  <div class="card mx-1 my-1" style="width: 20rem; background-color: azure;">
+    <div class="card-body" >
+      <h5 class="card-title"><a href="{{ url_for('bank.account_details' , id=account.id) }}">{{account.account_number}}</a></h5>
+      <h6 class="card-subtitle mb-2 text-muted">Balance: {{account.account_balance}}</h6>
+      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+      <!-- <a href="{{ url_for('bank.account_details' , id=account.id) }}" class="card-link btn btn-warning">Deposit</a> -->
+      <a href="{{url_for('bank.deposit', id=account.id)}}" class="card-link btn btn-success btn-sm">Deposit</a>
+      <a href="{{url_for('bank.withdraw', id=account.id)}}" class="card-link btn btn-danger btn-sm">Withdraw</a>
+      <a href="{{url_for('bank.transfer', id=account.id)}}" class="card-link btn btn-warning btn-sm">Transfer</a>
+
+      <!-- <a href="{{url_for('bank.transactions', id=account.id)}}" class="card-link btn btn-warning btn-sm">Transaction History</a> -->
+
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
+
+{% endblock %}

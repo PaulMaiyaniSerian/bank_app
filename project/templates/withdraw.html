@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+
+
+
+
+<div class="wrapper">
+    <!-- <div class="form-left">
+        <h2 class="text-uppercase">information</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Diam volutpat commodo.
+        </p>
+        <p class="text">
+            <span>Sub Head:</span>
+            Vitae auctor eu augudsf ut. Malesuada nunc vel risus commodo viverra. Praesent elementum facilisis leo vel.
+        </p>
+        <div class="form-field">
+            <input type="submit" class="account" value="Have an Account?">
+        </div>
+    </div> -->
+    <form class="form-right" method="POST" action="{{ url_for('bank.withdraw' , id=account.id) }}">
+        <h2 class="text-uppercase">Deposit To Account</h2>
+
+        <h2 class="text-uppercase">Account N.O: {{account.account_number}} </h2>
+
+        <h2 class="text-uppercase">Balance: {{account.account_balance}}</h2>
+
+        <!-- <div class="row">
+            <div class="col-sm-6 mb-3">
+                <label>First Name</label>
+                <input type="text" name="name" id="first_name"  class="input-field">
+            </div>
+            <div class="col-sm-6 mb-3">
+                <label>Last Name</label>
+                <input type="text" name="last_name" id="last_name" class="input-field">
+            </div>
+        </div> -->
+        <div class="mb-3">
+            <!-- <label>Users Email</label>
+            <input type="email" class="input-field" name="email" required> -->
+        </div>
+        <div class="row">
+            <div class="col-sm-6 mb-3">
+                <label>Amount: </label>
+                <input type="number" name="amount" id="pwd" class="input-field">
+            </div>
+            <!-- <div class="col-sm-6 mb-3">
+                <label>Repeat Password</label>
+                <input type="password" name="password2" id="cpwd" class="input-field">
+            </div> -->
+        </div>
+
+
+
+        <!-- <div class="mb-3">
+            <label class="option">I agree to the <a href="#">Terms and Conditions</a>
+                <input type="checkbox" checked>
+                <span class="checkmark"></span>
+            </label>
+        </div> -->
+        <div class="form-field">
+            <input type="submit" value="Deposit" class="register" name="register">
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+<!-- <h1 class="title">
+Withdraw
+</h1>
+
+<h4 class="title">
+Balance: {{account.account_balance}}
+</h4>
+
+
+<form method="POST" action="{{ url_for('bank.withdraw' , id=account.id) }}">
+    
+
+    <div class="field">
+        <div class="control">
+            <input class="input is-large" type="number" name="amount" placeholder="Amount to Withdraw">
+        </div>
+    </div>
+   
+    <button class="button is-block is-info is-large is-fullwidth">Withdraw</button>
+</form>
+
+
+<h1 class="title">
+    Transactions
+</h1>
+
+<ol>
+    {% for transaction in transactions %}
+    <li>date: {{transaction.date}} desc: {{transaction.description}} account_number: {{transaction.account}}  type: {{transaction.trans_type}} amount: {{transaction.amount}}  status {{transaction.status}}</li>
+    {% endfor %}
+</ol>
+ -->
+
+{% endblock %}
