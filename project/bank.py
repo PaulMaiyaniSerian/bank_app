@@ -215,10 +215,20 @@ def withdraw_post(id):
     except:
         return "invalid entry"
 
+
+    # check for amount
+
     if amount <= account.account_balance:
         print("amount", amount, "account_balance:", account.account_balance)
+    elif amount < 1:
+        flash(f"error cannot withdraw a negative number") 
+        return  redirect(url_for('bank.withdraw', id=id))
     else:
-        flash(f"not enough amount in your account to withdraw") 
+        flash(f"not enough amount in your account to withdraw {amount}") 
+        return  redirect(url_for('bank.withdraw', id=id))
+
+
+
 
     # create transaction
     transaction = Transaction(
@@ -245,6 +255,8 @@ def withdraw_post(id):
     
     transactions = Transaction.query.filter_by(account=account.id)
 
+
+    flash(f'Success withdrawing amount {amount}')
 
     return render_template('withdraw.html', account=account, transactions=transactions)
 
@@ -287,6 +299,14 @@ def deposit_post(id):
     except:
         return "invalid entry"
 
+    
+    # check
+    if amount < 1:
+        flash(f"error cannot deposit a negative number") 
+        return  redirect(url_for('bank.deposit', id=id))
+    
+
+
     # if amount <= account.account_balance:
     #     print("amount", amount, "account_balance:", account.account_balance)
     # else:
@@ -317,6 +337,7 @@ def deposit_post(id):
     
     transactions = Transaction.query.filter_by(account=account.id)
 
+    flash(f"successfull deposit of amount {amount}") 
 
     return render_template('deposit.html', account=account, transactions=transactions)
 
@@ -349,6 +370,8 @@ def transfer(id):
         }
         # print(data)
         formatted_trans.append(data)
+
+    
 
     return render_template('bank_transfer.html', account=account, transactions=formatted_trans)
 
@@ -385,6 +408,17 @@ def transfer_post(id):
     #     print("amount", amount, "account_balance:", account.account_balance)
     # else:
     #     flash(f"not enough amount in your account to withdraw") 
+
+    # check for amount
+
+    if amount <= account.account_balance:
+        print("amount", amount, "account_balance:", account.account_balance)
+    elif amount < 1:
+        flash(f"cannot transfer a negative number") 
+        return  redirect(url_for('bank.transfer', id=id))
+    else:
+        flash(f"not enough amount in your account to transfer {amount}") 
+        return  redirect(url_for('bank.transfer', id=id))
 
     # create transaction to withdraw from my account
     transaction = Transaction(
@@ -452,8 +486,10 @@ def transfer_post(id):
         }
         # print(data)
         formatted_trans.append(data)
+    
 
-
+    user_to_account = User.query.filter_by(id=to_account.user).first()
+    flash(f"succesful transfer of {amount} to  {user_to_account.name}'s account number{to_account.account_number} ") 
     return render_template('bank_transfer.html', account=account, transactions=formatted_trans)
 
 

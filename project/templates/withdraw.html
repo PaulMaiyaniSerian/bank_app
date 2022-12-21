@@ -23,7 +23,7 @@
         </div>
     </div> -->
     <form class="form-right" method="POST" action="{{ url_for('bank.withdraw' , id=account.id) }}">
-        <h2 class="text-uppercase">Deposit To Account</h2>
+        <h2 class="text-uppercase">Withdraw</h2>
 
         <h2 class="text-uppercase">Account N.O: {{account.account_number}} </h2>
 
@@ -63,7 +63,7 @@
             </label>
         </div> -->
         <div class="form-field">
-            <input type="submit" value="Deposit" class="register" name="register">
+            <input type="submit" value="Withdraw" class="register" name="register">
         </div>
     </form>
 </div>
