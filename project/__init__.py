@@ -16,7 +16,10 @@ def create_app():
 
     app.config['SECRET_KEY'] = 'secret-key-goes-here'
     # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://tn243:0j1YqHL4CRkI@db.ethereallab.app:3306/tn243'
+
+
+    # replace here with the mysql connection string
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite' # eg 'mysql:....'
 
 
     db.init_app(app)
