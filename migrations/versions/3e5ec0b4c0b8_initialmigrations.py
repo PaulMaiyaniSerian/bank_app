@@ -1,8 +1,8 @@
-"""add accounts model
+"""initialmigrations
 
-Revision ID: 9469a1f8cd47
+Revision ID: 3e5ec0b4c0b8
 Revises: 
-Create Date: 2022-12-21 13:23:35.603564
+Create Date: 2022-12-22 11:35:14.278350
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '9469a1f8cd47'
+revision = '3e5ec0b4c0b8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,7 +22,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('email', sa.String(length=100), nullable=True),
     sa.Column('password', sa.String(length=100), nullable=True),
-    sa.Column('name', sa.String(length=1000), nullable=True),
+    sa.Column('name', sa.String(length=200), nullable=True),
     sa.Column('is_system_user', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
@@ -30,8 +30,8 @@ def upgrade():
     op.create_table('account',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user', sa.Integer(), nullable=False),
-    sa.Column('account_number', sa.String(), nullable=True),
-    sa.Column('account_type', sa.String(length=1000), nullable=False),
+    sa.Column('account_number', sa.String(length=20), nullable=True),
+    sa.Column('account_type', sa.String(length=20), nullable=False),
     sa.Column('account_balance', sa.Integer(), nullable=True),
     sa.Column('date_created', sa.DateTime(), nullable=False),
     sa.Column('modified', sa.DateTime(), nullable=True),
@@ -44,7 +44,7 @@ def upgrade():
     sa.Column('date', sa.DateTime(), nullable=False),
     sa.Column('account', sa.Integer(), nullable=False),
     sa.Column('to_account', sa.Integer(), nullable=True),
-    sa.Column('description', sa.String(length=1000), nullable=True),
+    sa.Column('description', sa.String(length=200), nullable=True),
     sa.Column('trans_type', sa.String(length=100), nullable=True),
     sa.Column('amount', sa.Integer(), nullable=True),
     sa.Column('status', sa.String(length=100), nullable=True),

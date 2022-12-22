@@ -6,11 +6,10 @@ from flask_login import UserMixin
 from datetime import datetime
 
 class User(UserMixin, db.Model):
-
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
-    name = db.Column(db.String(1000))
+    name = db.Column(db.String(200))
     is_system_user = db.Column(Boolean, default=False)
     # accounts = db.relationship('Account', backref='user', lazy=True)
 
@@ -19,8 +18,8 @@ class User(UserMixin, db.Model):
 class Account(db.Model):
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy 000000000000
     user = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)   # associated with the user
-    account_number = db.Column(db.String, unique=True, nullable=True)
-    account_type = db.Column(db.String(1000), nullable=False, default="real")
+    account_number = db.Column(db.String(20), unique=True, nullable=True)
+    account_type = db.Column(db.String(20), nullable=False, default="real")
     account_balance = db.Column(db.Integer, default=0)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     modified = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
@@ -44,7 +43,7 @@ class Transaction(db.Model):
     # to_acc = db.relationship('Account', foreign_keys=[to_account,])
 
 
-    description = db.Column(db.String(1000))
+    description = db.Column(db.String(200))
     trans_type = db.Column(db.String(100))
     amount = db.Column(db.Integer)
     status = db.Column(db.String(100), nullable=True)
