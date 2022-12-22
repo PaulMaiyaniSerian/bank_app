@@ -19,7 +19,9 @@ def create_app():
 
 
     # replace here with the mysql connection string
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite' # eg 'mysql:....'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://tn243:0j1YqHL4CRkI@db.ethereallab.app:3306/tn243' # eg 'mysql:....'
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:rKskryi2PwcsvCsFmGEV@containers-us-west-42.railway.app:5789/railway' # eg 'mysql:....'
 
 
     db.init_app(app)
